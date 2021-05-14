@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     // This code here... fires whenever App.js loads
     db.collection('todos').orderBy('timestamp','desc').onSnapshot(snapshot =>{
-      setTodos(snapshot.docs.map(doc=>doc.data().todo))
+      setTodos(snapshot.docs.map(doc=>({id: doc.id, todo: doc.data().todo})))
     })
   }, [])
 
@@ -30,7 +30,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Welcome Clever Programmers 🚀!!</h1>
+      <h1>Welcome Folks 🚀!!</h1>
       <form>
         <FormControl>
           <InputLabel >✅ToDo Task</InputLabel>
@@ -40,7 +40,7 @@ function App() {
         </form>
       <ul>
         {todos.map(todo=>(
-          <Todo text={todo}/>
+          <Todo todo={todo}/>
         ))}
       </ul>
     </div>
